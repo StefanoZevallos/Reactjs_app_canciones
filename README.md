@@ -17,7 +17,7 @@
 ## Se agrega una nueva canción , en este caso Tacones rojos de Sebastián Yatra
 ![image](https://github.com/StefanoZevallos/Reactjs_app_canciones/assets/107054283/dbeb0372-2e2e-4ebb-bcf0-d4097aba8620)
 ## Agregamos una cancion nuevamente damos click a agregar canción
-![image](https://github.com/StefanoZevallos/Reactjs_app_canciones/assets/107054283/de144cc5-5ce1-4ae3-b1b4-9d8877c8b738)
+![image](https://github.com/StefanoZevallos/Reactjs_app_canciones/assets/107054283/3758a2bb-2462-4842-8910-091e6bb93cf2)
 ## Insertamos una nueva canción No voy Verte más de la banda Líbido
 ![image](https://github.com/StefanoZevallos/Reactjs_app_canciones/assets/107054283/f3e74962-fc8a-487a-8701-d6ceeb2030a0)
 ## La canción fue agregada con éxito a la app , se muestra el resultado
