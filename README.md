@@ -3,7 +3,8 @@
 
 ## Desktop
 ## Al Darle Click al botón (Agregar nueva música) , se despliega un Pop Up
-![image](https://github.com/StefanoZevallos/Reactjs_app_canciones/assets/107054283/de144cc5-5ce1-4ae3-b1b4-9d8877c8b738)
+![image](https://github.com/StefanoZevallos/Reactjs_app_canciones/assets/107054283/0ac1d795-4e31-4c2c-a17e-14ec02e0a0a9)
+
 ## Pop up desplegado - Debes insertar una canción
 ![image](https://github.com/StefanoZevallos/Reactjs_app_canciones/assets/107054283/0d80a061-dd47-40ee-b502-cd05941ac08c)
 ## Se agrega una nueva canción , en este caso Tacones rojos de Sebastián Yatra
