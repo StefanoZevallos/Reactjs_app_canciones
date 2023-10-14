@@ -2,7 +2,7 @@
 
 
 ## Desktop
-# Al Darle Click al boón , se despliega un Pop Up
+# Al Darle Click al botón (Agregar nueva música) , se despliega un Pop Up
 ![image](https://github.com/StefanoZevallos/Reactjs_app_canciones/assets/107054283/de144cc5-5ce1-4ae3-b1b4-9d8877c8b738)
 # Pop up desplegado - Debes insertar una canción
 ![image](https://github.com/StefanoZevallos/Reactjs_app_canciones/assets/107054283/0d80a061-dd47-40ee-b502-cd05941ac08c)
