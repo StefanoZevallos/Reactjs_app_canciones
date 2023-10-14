@@ -2,7 +2,8 @@
 ### App en React.Js , permite subir una canción poniendole la foto del artista de tu preferencia. El Backend está desarrollado con Express.js en Node.js.
 
 ## Explicación
-https://www.youtube.com/watch?v=Gf9j4XBqndU&ab_channel=StefanoZevallosReyes
+https://www.youtube.com/watch?v=Gf9j4XBqndU&ab_channel=StefanoZevallosReyes </br>
+La explicación empieza en el minuto 1:53
 
 ## Vista en pantallas Desktop
 ## Al Darle Click al botón (Agregar nueva música) , se despliega un Pop Up
