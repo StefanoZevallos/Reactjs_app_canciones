@@ -21,7 +21,7 @@ const page = () => {
       })
       alert("Usuario creado exitosamente")
     } catch(error) {
-      alert(error);
+      alert("La contraseña debe ser mayor a 6 dígitos , contener mínimo una miniscula y 1 numero");
     }}
    
  

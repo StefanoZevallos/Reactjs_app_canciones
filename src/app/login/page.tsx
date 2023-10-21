@@ -1,51 +1,111 @@
-'use'
+'use client'
 import React from 'react'
-import Login from '../components/Login'
-import { Formik, Field, Form } from 'formik';
+import { useState,useEffect } from 'react'
+import axios from "axios"
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import { tokenState } from '@/atoms/tokenState'
+import { nombreUsuarioState } from '@/atoms/nombreUsuarioState'
+import { useRecoilState } from 'recoil'
 
 
 const page = () => {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="bg-white p-8 rounded shadow-md w-96">
-          <h2 className="text-2xl font-semibold mb-4">Inicio de Sesión</h2>
-          <form >
-            <div className="mb-4">
-              <label htmlFor="correo" className="block text-gray-600">
-                Correo Electrónico
-              </label>
-              <input
-                type="email"
-                id="correo"
-                name="correo"
-                className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-400"
+  const [correo,setCorreo]=useState("")
+  const [contraseña,setContraseña]=useState("")
+  const [token, setToken] = useRecoilState(tokenState)
+  const [nombreUsuario,setNombreUsuario] = useRecoilState(nombreUsuarioState)
 
-              />
-            </div>
-            <div className="mb-6">
-              <label htmlFor="contrasena" className="block text-gray-600">
-                Contraseña
-              </label>
-              <input
-                type="password"
-                id="contrasena"
-                name="contrasena"
-                className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-400"
+  useEffect(() => {
+    if(token){
+    getPerfil()}
+  }, [token]);
 
-              />
-            </div>
-            <div className="flex items-center justify-between">
-              <button
-                type="submit"
-                className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
-              >
-                Iniciar Sesión
-              </button>
-            </div>
-          </form>
+  const loginUsuario = async () => {
+    try {
+     const response = await axios
+      .post("http://127.0.0.1:3001/login", { 
+        correo: correo,
+        password: contraseña
+      })
+      console.log(response.data.token);
+       setToken(response.data.token)
+       console.log(token);
+    } catch(error) {
+      alert("Error al iniciar sesión");
+    }}
+    const getPerfil = async () => {
+      try {
+    const perfilResponse = await axios
+    .get("http://127.0.0.1:3001/perfil", {
+      headers: {
+        Authorization: token, 
+      },
+    })
+    setNombreUsuario(perfilResponse.data.content.nombre.charAt(0).toUpperCase())}
+    catch(error) {
+    }
+  }
+
+   
+ 
+  return (
+    <div className="h-[90vh] w-full flex items-center justify-center ">
+      <div className="flex flex-col justify-start bg-white p-8 rounded shadow-sm w-[90%] h-[90%]">
+        <div className='w-full flex justify-center items-center'>
+          <h2 className="text-4xl font-extrabold mb-8 text-gray-600">
+            ¡Inicia Sesión!
+          </h2>
+        </div>
+
+
+          <div className="mb-4">
+            <label htmlFor="correo" className="block text-gray-600">
+              Correo Electrónico
+            </label>
+            <input
+            onChange={(e) => setCorreo(e.target.value)}
+              type="email"
+              id="correo"
+
+              className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-400"
+
+            />
+          </div>
+          <div className="mb-6">
+            <label htmlFor="contrasena" className="block text-gray-600">
+              Contraseña
+            </label>
+            <input
+            onChange={(e) => setContraseña(e.target.value)}
+              type="password"
+              id="contrasena"
+              className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-400"
+            />
+          </div>
+          <div className="mt-[100px] flex items-center justify-center">
+            <Link href={"/"}>
+            <button onClick={()=>loginUsuario()}
+              className="font-semibold bg-gradient-to-r from-blue-200 to-gray-300 text-white px-6 py-3 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transform transition duration-300 hover:scale-105"
+            >
+              Iniciar Sesión
+            </button>
+            </Link>
+          </div>
+        <div className="flex flex-col items-center justify-center pt-[100px]">
+          <p className=" font-semibold text-gray-500">
+            ¿Olvidaste Tu contraseña?
+          </p>
+          <Link href={"/login"}>
+          <p className="mt-2 text-sm font-semibold text-gray-800">
+            ¡Recuperar Contraseña!
+          </p>
+          </Link>
+
+
         </div>
       </div>
-    );
+    </div>
+  )
 }
 
 export default page

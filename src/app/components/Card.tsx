@@ -4,34 +4,21 @@ import Image from 'next/image'
 import axios from "axios"
 import { useEffect, useState } from 'react'
 
-const Card = ({ artista, cancion, imagen , usuario}) => {
-  const [data, setData] = useState([]);
-  const getData = async () => {
-    const { data } = await axios.get('http://127.0.0.1:3001/canciones');
-    setData(data.content);
-  };
-  useEffect(() => {
-    getData();
-  }, []);
+const Card = ({ artista, cancion }) => {
+
+
 
   return (
     <>
-      <div className="flex justify-center ">
-        <section className="w-[90%] bg-red-100 rounded-lg h-[280px] flex flex-col items-center mb-4">
-        <div className="mt-2  w-[250px] ">
-        <Image className="w-[100%] h-[180px] rounded-md"
-              src={imagen}
-              width={10000}
-              height={10000}
-              alt="Picture of the author"
-            />
-          </div>
-          <div className="w-full h-[100px] flex flex-col justify-center items-center">
-            <p> Artista: {artista} </p>
-            <p> Canción: {cancion} </p>
-          </div>
-        </section>
-      </div>
+<div className="flex justify-center">
+  <section className="w-[80%] bg-red-300 rounded-md shadow-sm p-3 mb-2 mt-1 relative">
+    <div className="w-full h-24 flex flex-col justify-center items-center">
+      <h2 className="text-md font-extrabold text-white">Artista: {artista}</h2>
+      <h3 className="text-base font-semibold text-white mt-1">Canción: {cancion}</h3>
+    </div>
+    
+  </section>
+</div>
     </>
   )
 }
