@@ -13,7 +13,7 @@ const page = () => {
   const registroUsuario = async () => {
     try {
       await axios
-      .post("http://127.0.0.1:3001/registro", { 
+      .post("https://album-musica-backend.onrender.com/registro", { 
         nombre : nombre,
         apellido: apellido,
         correo: correo,

@@ -16,10 +16,10 @@ const Header = () => {
   const [token,setToken] = useRecoilState(tokenState)
   const [usuarioId, setUsuarioId] = useRecoilState(usuarioIdState)
   const LogoutButton = () => {
-    setNombreUsuario("")
-    setDataCancionesState([])
-    setToken("")
-    setUsuarioId("")
+    localStorage.removeItem('token')
+    localStorage.removeItem('usuarioId')
+    localStorage.removeItem('nombreUsuario')
+    setDropDown(false)
   }
   return (
     <> 
@@ -36,9 +36,9 @@ const Header = () => {
       </Link>
       <div onClick={()=> {setDropDown(!dropDown)}} className='mr-4 lg:mr-8 flex'>
         {
-          nombreUsuario ? ( 
+          localStorage.getItem('nombreUsuario') ? ( 
             <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center mt-1">
-            <p className="text-white text-2xl font-bold">{nombreUsuario}</p>
+            <p className="text-white text-2xl font-bold">{localStorage.getItem('nombreUsuario')}</p>
           </div>
           ):
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-12 h-12">
@@ -53,17 +53,19 @@ const Header = () => {
     { dropDown ? (
     <section className='flex justify-end mr-2 lg:mr-7'>
       {
-        nombreUsuario ? (
+        localStorage.getItem('nombreUsuario') ? (
           <div className='bg-gray-300 w-[120px] h-[50px] flex flex-col justify-center items-center rounded-lg absolute'>
+            <Link href={"/"}>
           <p onClick={()=>LogoutButton()} className='font-bold text-red-500 cursor-pointer'> Cerrar Sesión</p>
+          </Link>
         </div>
         ):
         <div className='bg-gray-200 w-[120px] h-[50px] flex flex-col justify-center items-center rounded-lg absolute'>
         <Link href={"/login"}>
-        <p className='font-bold'> Iniciar Sesión</p>
+        <p onClick={()=>setDropDown(false)} className='font-bold'> Iniciar Sesión</p>
         </Link>
         <Link href={"/registro"}>
-        <p className='font-bold'> Registrate</p>
+        <p onClick={()=>setDropDown(false)} className='font-bold'> Registrate</p>
         </Link>
       </div>
       }

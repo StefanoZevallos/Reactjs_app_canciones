@@ -15,32 +15,36 @@ const page = () => {
   const [token, setToken] = useRecoilState(tokenState)
   const [nombreUsuario,setNombreUsuario] = useRecoilState(nombreUsuarioState)
 
-  useEffect(() => {
-    if(token){
-    getPerfil()}
-  }, [token]);
+  // useEffect(() => {
+  //   if(token){
+  //   getPerfil()}
+  // }, [token]);
 
   const loginUsuario = async () => {
     try {
+      console.log(correo);
+      console.log(contraseña);
      const response = await axios
-      .post("http://127.0.0.1:3001/login", { 
+      .post("https://album-musica-backend.onrender.com/login", { 
         correo: correo,
         password: contraseña
       })
-      console.log(response.data.token);
-       setToken(response.data.token)
-       console.log(token);
+      const nuevoToken = response.data.token; 
+      localStorage.setItem('token', nuevoToken);
+       getPerfil()
     } catch(error) {
       alert("Error al iniciar sesión");
     }}
+
     const getPerfil = async () => {
       try {
     const perfilResponse = await axios
-    .get("http://127.0.0.1:3001/perfil", {
+    .get("https://album-musica-backend.onrender.com/perfil", {
       headers: {
-        Authorization: token, 
+        Authorization: localStorage.getItem('token'), 
       },
     })
+    localStorage.setItem('nombreUsuario', perfilResponse.data.content.nombre.charAt(0).toUpperCase())
     setNombreUsuario(perfilResponse.data.content.nombre.charAt(0).toUpperCase())}
     catch(error) {
     }

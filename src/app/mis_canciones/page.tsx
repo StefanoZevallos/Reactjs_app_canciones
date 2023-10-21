@@ -18,7 +18,7 @@ const Mis_Canciones = () => {
 
 
   const getData = async () => {
-    const { data } = await axios.get('http://127.0.0.1:3001/canciones');
+    const { data } = await axios.get('https://album-musica-backend.onrender.com/canciones');
     setDataCanciones(data.content);
   };
 
@@ -27,10 +27,8 @@ const Mis_Canciones = () => {
   }, []);
 
   useEffect(() => {
-    if (token) {
       getPerfil()
-    }
-  }, [token]);
+  }, []);
 
   const subirArtista = async () => {
     if (!nombreCancion || !nombreArtista) {
@@ -40,9 +38,9 @@ const Mis_Canciones = () => {
     const cancion = {
       "nombreCancion": nombreCancion,
       "nombreArtista": nombreArtista,
-      "usuarioId": usuarioId
+      "usuarioId": localStorage.getItem('usuarioId')
     }
-    axios.post('http://127.0.0.1:3001/canciones', cancion)
+    axios.post('https://album-musica-backend.onrender.com/canciones', cancion)
       .then((response) => {
         alert('Canción agregada con éxito');
       })
@@ -56,11 +54,12 @@ const Mis_Canciones = () => {
   const getPerfil = async () => {
     try {
       const perfilResponse = await axios
-        .get("http://127.0.0.1:3001/perfil", {
+        .get("https://album-musica-backend.onrender.com/perfil", {
           headers: {
-            Authorization: token,
+            Authorization: localStorage.getItem('token')
           },
         })
+      localStorage.setItem('usuarioId',perfilResponse.data.content.id );
       setUsuarioId(perfilResponse.data.content.id)
     }
     catch (error) {
@@ -71,7 +70,13 @@ const Mis_Canciones = () => {
   return (
     <>
       <div className='flex justify-center items-center'>
-        <button onClick={() => setPopUp(!popup)} className="m-4 bg-blue-400 rounded-full h-10 w-[200px] text-white font-bold"> Agregar nueva música</button>
+        {
+          localStorage.getItem('token') ? (
+            <button onClick={() => setPopUp(!popup)} className="m-4 bg-blue-400 rounded-full h-10 w-[200px] text-white font-bold"> Agregar nueva música</button>
+          ) :
+          <div></div>
+        }
+    
       </div>
       {popup ? (
         <>
@@ -117,13 +122,13 @@ const Mis_Canciones = () => {
       }
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-rows-auto lg:grid-cols-4 lg:grid-rows-auto">
         {
-          token ? (
-            dataCanciones.filter(data => data.usuarioId === usuarioId)
+          localStorage.getItem('token') ? (
+            dataCanciones.filter(data => data.usuarioId == localStorage.getItem('usuarioId'))
             .map((data) => (
               <Card key={data.usuarioId} artista={data.nombreArtista} cancion={data.nombreCancion} />
             ))
           ) :
-            <p>Inicia Sesión para ver tus canciones</p>
+            <p className='font-bold'>Inicia Sesión para ver tus canciones</p>
         }
 
       </div>
