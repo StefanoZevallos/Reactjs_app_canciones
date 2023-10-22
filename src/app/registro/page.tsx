@@ -5,7 +5,7 @@ import axios from "axios"
 import Link from 'next/link'
 
 
-const page = () => {
+const Registro = () => {
   const [nombre,setNombre]=useState("")
   const [apellido,setApellido]=useState("")
   const [correo,setCorreo]=useState("")
@@ -109,4 +109,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Registro
