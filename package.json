@@ -27,6 +27,6 @@
     "typescript": "^5"
   },
   "engines": {
-    "node": "16"
+    "node": "18.17.1"
 }
 }
