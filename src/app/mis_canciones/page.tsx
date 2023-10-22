@@ -15,6 +15,7 @@ const Mis_Canciones = () => {
   const [dataCanciones, setDataCanciones] = useRecoilState(dataCancionesState)
   const [usuarioId, setUsuarioId] = useRecoilState(usuarioIdState)
   const [token, setToken] = useRecoilState(tokenState);
+  const [nada,setNada]=useState("")
 
 
     useEffect(() => {
@@ -23,11 +24,11 @@ const Mis_Canciones = () => {
       setDataCanciones(data.content);
     };
     getData()
-  }, []);
+  }, [nada]);
 
   useEffect(() => {
       getPerfil()
-  }, );
+  }, [nada]);
 
   const subirArtista = async () => {
     if (!nombreCancion || !nombreArtista) {
