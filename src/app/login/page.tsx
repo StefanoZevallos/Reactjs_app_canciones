@@ -9,7 +9,7 @@ import { nombreUsuarioState } from '@/atoms/nombreUsuarioState'
 import { useRecoilState } from 'recoil'
 
 
-const page = () => {
+const Login = () => {
   const [correo,setCorreo]=useState("")
   const [contraseña,setContraseña]=useState("")
   const [token, setToken] = useRecoilState(tokenState)
@@ -112,4 +112,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Login
