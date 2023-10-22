@@ -22,8 +22,8 @@ const Mis_Canciones = () => {
       const { data } = await axios.get('https://album-musica-backend.onrender.com/canciones');
       setDataCanciones(data.content);
     };
-    getData();
-  }, );
+    getData()
+  }, []);
 
   useEffect(() => {
       getPerfil()
