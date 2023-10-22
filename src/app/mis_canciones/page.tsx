@@ -24,11 +24,11 @@ const Mis_Canciones = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, );
 
   useEffect(() => {
       getPerfil()
-  }, []);
+  }, );
 
   const subirArtista = async () => {
     if (!nombreCancion || !nombreArtista) {
@@ -122,8 +122,8 @@ const Mis_Canciones = () => {
       }
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-rows-auto lg:grid-cols-4 lg:grid-rows-auto">
         {
-          usuarioId ? (
-            dataCanciones.filter(data => data.usuarioId == usuarioId)
+          localStorage.getItem('token') ? (
+            dataCanciones.filter(data => data.usuarioId == localStorage.getItem('usuarioId'))
             .map((data) => (
               <Card key={data.usuarioId} artista={data.nombreArtista} cancion={data.nombreCancion} />
             ))
