@@ -28,7 +28,7 @@ const Mis_Canciones = () => {
 
   useEffect(() => {
       getPerfil()
-  }, [nada]);
+  }, []);
 
   const subirArtista = async () => {
     if (!nombreCancion || !nombreArtista) {
