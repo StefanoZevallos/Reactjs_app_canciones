@@ -17,12 +17,11 @@ const Mis_Canciones = () => {
   const [token, setToken] = useRecoilState(tokenState);
 
 
-  const getData = async () => {
-    const { data } = await axios.get('https://album-musica-backend.onrender.com/canciones');
-    setDataCanciones(data.content);
-  };
-
-  useEffect(() => {
+    useEffect(() => {
+    const getData = async () => {
+      const { data } = await axios.get('https://album-musica-backend.onrender.com/canciones');
+      setDataCanciones(data.content);
+    };
     getData();
   }, );
 
