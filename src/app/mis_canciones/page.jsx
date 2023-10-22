@@ -24,11 +24,26 @@ const Mis_Canciones = () => {
       setDataCanciones(data.content);
     };
     getData()
-  }, [getData()]);
+  }, [setDataCanciones]);
 
   useEffect(() => {
-      getPerfil()
-  }, []);
+    const getPerfil = async () => {
+      try {
+        const perfilResponse = await axios
+          .get("https://album-musica-backend.onrender.com/perfil", {
+            headers: {
+              Authorization: localStorage.getItem('token')
+            },
+          })
+        localStorage.setItem('usuarioId',perfilResponse.data.content.id );
+        setUsuarioId(perfilResponse.data.content.id)
+      }
+      catch (error) {
+      }
+    }
+    getPerfil(); // Llamas a la función directamente
+    
+  }, [setUsuarioId]);
 
   const subirArtista = async () => {
     if (!nombreCancion || !nombreArtista) {
@@ -51,20 +66,7 @@ const Mis_Canciones = () => {
     setPopUp(false)
   };
 
-  const getPerfil = async () => {
-    try {
-      const perfilResponse = await axios
-        .get("https://album-musica-backend.onrender.com/perfil", {
-          headers: {
-            Authorization: localStorage.getItem('token')
-          },
-        })
-      localStorage.setItem('usuarioId',perfilResponse.data.content.id );
-      setUsuarioId(perfilResponse.data.content.id)
-    }
-    catch (error) {
-    }
-  }
+  
 
 
   return (

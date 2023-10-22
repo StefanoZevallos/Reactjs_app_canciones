@@ -12,16 +12,16 @@ const Registro = () => {
   const [contraseña,setContraseña]=useState("")
   const registroUsuario = async () => {
     try {
-      await axios
+      const response =  await axios
       .post("https://album-musica-backend.onrender.com/registro", { 
         nombre : nombre,
         apellido: apellido,
         correo: correo,
         password: contraseña
-      })
+      }) 
       alert("Usuario creado exitosamente")
     } catch(error) {
-      alert("La contraseña debe ser mayor a 6 dígitos , contener mínimo una miniscula y 1 numero");
+      alert("La contraseña debe ser mayor a 6 dígitos , contener mínimo una miniscula , una mayúscula y 1 numero");
     }}
    
  
@@ -42,7 +42,6 @@ const Registro = () => {
             onChange={(e) => setNombre(e.target.value)}
               type="text"
               id="nombre"
-              name="nombre"
               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-400"
             />
           </div>
@@ -83,13 +82,12 @@ const Registro = () => {
               className="w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-400"
             />
           </div>
-          <div className="mt-12 flex items-center justify-center">
-            <button onClick={()=>registroUsuario()}
-              type="submit"
-              className="font-semibold bg-gradient-to-r from-blue-200 to-gray-300 text-white px-6 py-3 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transform transition duration-300 hover:scale-105"
+          <div className="mt-12 flex items-center justify-center cursor-pointer">
+            <p onClick={()=>registroUsuario()}
+              className="cursor-pointer font-semibold bg-gradient-to-r from-blue-200 to-gray-300 text-white px-6 py-3 rounded-full hover:bg-blue-600 focus:outline-none focus:bg-blue-600 transform transition duration-300 hover:scale-105"
             >
               ¡Regístrate Ahora!
-            </button>
+            </p>
           </div>
         </form>
         <div className="flex flex-col items-center justify-center pt-10">

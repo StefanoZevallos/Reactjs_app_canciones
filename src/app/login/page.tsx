@@ -29,6 +29,8 @@ const Login = () => {
         correo: correo,
         password: contraseña
       })
+      console.log(contraseña);
+      
       const nuevoToken = response.data.token; 
       localStorage.setItem('token', nuevoToken);
        getPerfil()
