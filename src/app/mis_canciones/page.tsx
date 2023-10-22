@@ -24,7 +24,7 @@ const Mis_Canciones = () => {
       setDataCanciones(data.content);
     };
     getData()
-  }, [nada]);
+  }, [getData()]);
 
   useEffect(() => {
       getPerfil()
