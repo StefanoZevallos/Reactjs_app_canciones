@@ -131,7 +131,7 @@ const Mis_Canciones = () => {
                 <Card key={data.usuarioId} artista={data.nombreArtista} cancion={data.nombreCancion} />
               ))
           ) :
-            <p className='font-bold'>Inicia Sesión para ver tus canciones</p>
+            <p className='font-bold'>Inicia Sesión para ver tus canciones!</p>
         }
 
       </div>
