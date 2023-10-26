@@ -9,76 +9,83 @@ import { usuarioIdState } from '@/atoms/usuarioIdState'
 import { useRecoilState } from 'recoil'
 
 const Mis_Canciones = () => {
-  const [popup, setPopUp] = useState(false)
+  const [popup, setPopUp] = useState(false);
   const [nombreCancion, setNombreCancion] = useState("");
   const [nombreArtista, setNombreArtista] = useState("");
-  const [dataCanciones, setDataCanciones] = useRecoilState(dataCancionesState)
-  const [usuarioId, setUsuarioId] = useRecoilState(usuarioIdState)
+  const [dataCanciones, setDataCanciones] = useRecoilState(dataCancionesState);
+  const [usuarioId, setUsuarioId] = useRecoilState(usuarioIdState);
   const [token, setToken] = useRecoilState(tokenState);
-  const [nada,setNada]=useState("")
 
-
-    useEffect(() => {
+  useEffect(() => {
     const getData = async () => {
       const { data } = await axios.get('https://album-musica-backend.onrender.com/canciones');
       setDataCanciones(data.content);
     };
-    getData()
+    getData();
   }, [setDataCanciones]);
 
   useEffect(() => {
     const getPerfil = async () => {
       try {
-        const perfilResponse = await axios
-          .get("https://album-musica-backend.onrender.com/perfil", {
-            headers: {
-              Authorization: localStorage.getItem('token')
-            },
-          })
-        localStorage.setItem('usuarioId',perfilResponse.data.content.id );
-        setUsuarioId(perfilResponse.data.content.id)
+        const perfilResponse = await axios.get("https://album-musica-backend.onrender.com/perfil", {
+          headers: {
+            Authorization: token,
+          },
+        });
+
+        const usuarioId = perfilResponse.data.content.id;
+        localStorage.setItem('usuarioId', usuarioId);
+        setUsuarioId(usuarioId);
+      } catch (error) {
+        // Maneja el error
       }
-      catch (error) {
-      }
+    };
+
+    if (token) {
+      getPerfil();
     }
-    getPerfil(); // Llamas a la función directamente
-    
-  }, [setUsuarioId]);
+  }, [token, setUsuarioId]);
 
   const subirArtista = async () => {
     if (!nombreCancion || !nombreArtista) {
       alert('Por favor, complete todos los campos antes de subir la canción.');
       return;
     }
+
+    const usuarioId = localStorage.getItem('usuarioId');
+
+    if (!usuarioId) {
+      alert('No se encontró el ID de usuario. Asegúrate de estar autenticado.');
+      return;
+    }
+
     const cancion = {
       "nombreCancion": nombreCancion,
       "nombreArtista": nombreArtista,
-      "usuarioId": localStorage.getItem('usuarioId')
+      "usuarioId": usuarioId,
+    };
+
+    try {
+      const response = await axios.post('https://album-musica-backend.onrender.com/canciones', cancion);
+      alert('Canción agregada con éxito');
+    } catch (error) {
+      console.error(error);
+      alert('Error al agregar la canción');
     }
-    axios.post('https://album-musica-backend.onrender.com/canciones', cancion)
-      .then((response) => {
-        alert('Canción agregada con éxito');
-      })
-      .catch((error) => {
-        console.error(error);
-        alert('Error al agregar el producto');
-      });
-    setPopUp(false)
+
+    setPopUp(false);
   };
-
-  
-
 
   return (
     <>
       <div className='flex justify-center items-center'>
-        {
-          localStorage.getItem('token') ? (
-            <button onClick={() => setPopUp(!popup)} className="m-4 bg-blue-400 rounded-full h-10 w-[200px] text-white font-bold"> Agregar nueva música</button>
-          ) :
+        {token ? (
+          <button onClick={() => setPopUp(!popup)} className="m-4 bg-blue-400 rounded-full h-10 w-[200px] text-white font-bold">
+            Agregar nueva música
+          </button>
+        ) : (
           <div></div>
-        }
-    
+        )}
       </div>
       {popup ? (
         <>
@@ -123,19 +130,17 @@ const Mis_Canciones = () => {
         </div>
       }
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-rows-auto lg:grid-cols-4 lg:grid-rows-auto">
-        {
-          localStorage.getItem('token') ? (
-            dataCanciones.filter(data => data.usuarioId == localStorage.getItem('usuarioId'))
+        {token ? (
+          dataCanciones.filter(data => data.usuarioId == localStorage.getItem('usuarioId'))
             .map((data) => (
               <Card key={data.usuarioId} artista={data.nombreArtista} cancion={data.nombreCancion} />
             ))
-          ) :
-            <p className='font-bold'>Inicia Sesión para ver tus canciones</p>
-        }
-
+        ) : (
+          <p className='font-bold'>Inicia Sesión para ver tus canciones</p>
+        )}
       </div>
     </>
-  )
+  );
 }
 
-export default Mis_Canciones
+export default Mis_Canciones;
