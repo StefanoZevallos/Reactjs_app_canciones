@@ -126,7 +126,7 @@ const Mis_Canciones = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-rows-auto lg:grid-cols-4 lg:grid-rows-auto">
         {
           typeof window !== 'undefined' && localStorage.getItem('token') ? (
-            dataCanciones.filter(data => data.usuarioId == typeof window !== 'undefined' && localStorage.getItem('usuarioId'))
+            dataCanciones.filter(data => data.usuarioId == (typeof window !== 'undefined' && localStorage.getItem('usuarioId')))
               .map((data) => (
                 <Card key={data.usuarioId} artista={data.nombreArtista} cancion={data.nombreCancion} />
               ))
