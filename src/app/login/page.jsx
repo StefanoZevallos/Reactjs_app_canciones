@@ -15,10 +15,6 @@ const Login = () => {
   const [token, setToken] = useRecoilState(tokenState)
   const [nombreUsuario,setNombreUsuario] = useRecoilState(nombreUsuarioState)
 
-  // useEffect(() => {
-  //   if(token){
-  //   getPerfil()}
-  // }, [token]);
 
   const loginUsuario = async () => {
     try {
