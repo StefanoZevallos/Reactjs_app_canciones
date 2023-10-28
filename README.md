@@ -5,7 +5,7 @@
 https://reactjs-app-canciones-aes93l279-stefanozevallos.vercel.app/
 
 ## Explicación
-[https://www.youtube.com/watch?v=Gf9j4XBqndU&ab_channel=StefanoZevallosReyes](https://www.youtube.com/watch?v=GROXmL50W9c&ab_channel=StefanoZevallosReyes) </br>
+https://www.youtube.com/watch?v=fO_FJE_18f4&ab_channel=StefanoZevallosReyes </br>
 
 ![image](https://github.com/StefanoZevallos/Reactjs_app_canciones/assets/107054283/b31218c4-e26a-4261-9fc7-8a73572d5f01)
 ## App sin Usuario Logueado 
